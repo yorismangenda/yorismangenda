@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Books — Yoris Mangenda</title>
 
+  <meta
+    name="description"
+    content="Books by Yoris Mangenda on architecture, cultural heritage, and history in Borneo."
+  >
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     :root {
       --text: #111111;
       --muted: #969696;
-      --cover-bg: #f2f2f2;
+      --cover-background: #f2f2f2;
       --page-padding: 44px;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -46,12 +60,14 @@
 
     .site-name {
       font-size: 16px;
+      line-height: 1.4;
       font-weight: 700;
       letter-spacing: -0.5px;
     }
 
     .page-navigation {
       display: flex;
+      align-items: center;
       gap: 24px;
     }
 
@@ -59,10 +75,11 @@
       color: var(--muted);
       font-size: 16px;
       font-weight: 600;
+      transition: color 0.2s ease;
     }
 
-    .page-navigation a.active,
-    .page-navigation a:hover {
+    .page-navigation a:hover,
+    .page-navigation a.active {
       color: var(--text);
     }
 
@@ -70,16 +87,17 @@
       font-weight: 700;
     }
 
-    /* BOOK GRID */
+    /* BOOK COLLECTION */
 
     main {
-      padding: 60px var(--page-padding) 0;
+      padding: 65px var(--page-padding) 0;
     }
 
     .books-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
+      column-gap: 24px;
+      row-gap: 28px;
     }
 
     .book-card {
@@ -88,16 +106,23 @@
 
     .book-link {
       display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .book-link:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 4px;
     }
 
     .book-cover {
       width: 100%;
       aspect-ratio: 4 / 5;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--cover-bg);
+      overflow: hidden;
+      background: var(--cover-background);
     }
 
     .book-cover img {
@@ -120,6 +145,7 @@
       font-weight: 600;
       letter-spacing: -0.2px;
       overflow-wrap: break-word;
+      transition: color 0.2s ease;
     }
 
     .book-year {
@@ -132,12 +158,7 @@
       color: #666666;
     }
 
-    .book-link:focus-visible {
-      outline: 2px solid #111111;
-      outline-offset: 4px;
-    }
-
-    /* BOTTOM NAVIGATION */
+    /* MAIN WEBSITE NAVIGATION */
 
     .bottom-navigation {
       display: flex;
@@ -153,16 +174,18 @@
     }
 
     .main-menu a {
+      display: block;
       color: var(--muted);
       font-size: 40px;
       line-height: 1.12;
       font-weight: 700;
       letter-spacing: -1.5px;
       white-space: nowrap;
+      transition: color 0.2s ease;
     }
 
-    .main-menu a.active,
-    .main-menu a:hover {
+    .main-menu a:hover,
+    .main-menu a.active {
       color: var(--text);
     }
 
@@ -176,6 +199,29 @@
       margin: 0;
       color: #555555;
       font-size: 10px;
+      line-height: 1.5;
+    }
+
+    /* TABLET */
+
+    @media (min-width: 600px) and (max-width: 1099px) {
+      :root {
+        --page-padding: 28px;
+      }
+
+      .books-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 20px;
+        row-gap: 30px;
+      }
+
+      .book-title {
+        font-size: 14px;
+      }
+
+      .main-menu a {
+        font-size: 36px;
+      }
     }
 
     /* SHORT DESKTOP SCREENS */
@@ -204,23 +250,6 @@
       }
     }
 
-    /* TABLET */
-
-    @media (min-width: 600px) and (max-width: 1099px) {
-      :root {
-        --page-padding: 28px;
-      }
-
-      .books-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        row-gap: 30px;
-      }
-
-      .book-title {
-        font-size: 14px;
-      }
-    }
-
     /* MOBILE */
 
     @media (max-width: 599px) {
@@ -232,13 +261,16 @@
         padding-top: 20px;
       }
 
-      .site-name,
-      .page-navigation a {
+      .site-name {
         font-size: 14px;
       }
 
       .page-navigation {
         gap: 16px;
+      }
+
+      .page-navigation a {
+        font-size: 14px;
       }
 
       main {
@@ -281,7 +313,13 @@
       }
     }
 
+    /* ACCESSIBILITY */
+
     @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
       *,
       *::before,
       *::after {
@@ -293,97 +331,206 @@
 
 <body>
 
+  <!-- HEADER -->
+
   <header class="site-header">
-    <a class="site-name" href="./index.html">Yoris Mangenda</a>
+
+    <a class="site-name" href="./index.html">
+      Yoris Mangenda
+    </a>
 
     <nav class="page-navigation" aria-label="Publication navigation">
-      <a class="active" href="./books.html" aria-current="page">Books</a>
-      <a href="./articles.html">Articles</a>
+
+      <a
+        class="active"
+        href="./books.html"
+        aria-current="page"
+      >
+        Books
+      </a>
+
+      <a href="./articles.html">
+        Articles
+      </a>
+
     </nav>
+
   </header>
 
+
+  <!-- BOOK COLLECTION -->
+
   <main>
+
     <section class="books-grid" aria-label="Books by Yoris Mangenda">
 
+
+      <!-- 1. RUMAH BOSAR -->
+
       <article class="book-card">
-        <a class="book-link" href="./rumah-bosar.html">
+
+        <a
+          class="book-link"
+          href="./rumah-bosar.html"
+          aria-label="View details of Rumah Bosar"
+        >
+
           <div class="book-cover">
+
             <img
               src="./images/7FD8637D-A2B8-417B-9599-6B64A17F0D84.PNG"
-              alt="Rumah Bosar book cover"
+              alt="Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan book cover"
               fetchpriority="high"
             >
+
           </div>
+
           <h2 class="book-title">
             Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan
             <span class="book-year">(2026)</span>
           </h2>
+
         </a>
+
       </article>
 
+
+      <!-- 2. DAYAK ARCHITECTURAL HERITAGE -->
+
       <article class="book-card">
-        <a class="book-link" href="./dayak-architectural-heritage.html">
+
+        <a
+          class="book-link"
+          href="./dayak-architectural-heritage.html"
+          aria-label="View details of Dayak Architectural Heritage"
+        >
+
           <div class="book-cover">
+
             <img
               src="./images/3310A5C4-9C8A-4C7D-B3F2-507647B4FD0A.PNG"
               alt="Dayak Architectural Heritage book cover"
               fetchpriority="high"
             >
+
           </div>
+
           <h2 class="book-title">
             Dayak Architectural Heritage: The Diversity of Architecture and Historical Traces
             <span class="book-year">(2024)</span>
           </h2>
+
         </a>
+
       </article>
 
+
+      <!-- 3. KHAZANAH ARSITEKTUR DAYAK -->
+
       <article class="book-card">
-        <a class="book-link" href="./khazanah-arsitektur-dayak.html">
+
+        <a
+          class="book-link"
+          href="./khazanah-arsitektur-dayak.html"
+          aria-label="View details of Khazanah Arsitektur Dayak"
+        >
+
           <div class="book-cover">
+
             <img
               src="./images/406A88A1-51A8-4D10-AF3D-63F94B24BC7F.PNG"
               alt="Khazanah Arsitektur Dayak book cover"
               loading="lazy"
             >
+
           </div>
+
           <h2 class="book-title">
             Khazanah Arsitektur Dayak: Keberagaman Arsitektur dan Jejak Sejarahnya
             <span class="book-year">(2024)</span>
           </h2>
+
         </a>
+
       </article>
 
+
+      <!-- 4. ARSITEKTUR RADAKNG -->
+
       <article class="book-card">
-        <a class="book-link" href="./arsitektur-radakng.html">
+
+        <a
+          class="book-link"
+          href="./arsitektur-radakng.html"
+          aria-label="View details of Arsitektur Radakng"
+        >
+
           <div class="book-cover">
+
             <img
               src="./images/9DA06347-871D-4249-9797-C24915600382.PNG"
               alt="Arsitektur Radakng book cover"
               loading="lazy"
             >
+
           </div>
+
           <h2 class="book-title">
             Arsitektur Radakng: Kehidupan Komunal dan Dayak Kanayatn
             <span class="book-year">(2020)</span>
           </h2>
+
         </a>
+
       </article>
 
+
     </section>
+
   </main>
 
+
+  <!-- MAIN WEBSITE NAVIGATION -->
+
   <nav class="bottom-navigation" aria-label="Main navigation">
+
     <div class="main-menu">
-      <a href="./activities.html">activities</a>
-      <a class="active" href="./books.html" aria-current="page">publications</a>
-      <a href="./about.html">about</a>
-      <a href="./contacts.html">contacts</a>
+
+      <a href="./activities.html">
+        activities
+      </a>
+
+      <a
+        class="active"
+        href="./books.html"
+        aria-current="page"
+      >
+        publications
+      </a>
+
+      <a href="./about.html">
+        about
+      </a>
+
+      <a href="./contacts.html">
+        contacts
+      </a>
+
     </div>
+
   </nav>
 
+
+  <!-- FOOTER -->
+
   <footer class="site-footer">
-    <p class="copyright">© 2026 Yoris Mangenda</p>
+
+    <p class="copyright">
+      © 2026 Yoris Mangenda
+    </p>
+
   </footer>
 
 </body>
+
 </html>
