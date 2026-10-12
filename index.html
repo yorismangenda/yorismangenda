@@ -4,212 +4,156 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="description"
-    content="The personal website of Yoris Mangenda, researcher, writer, and cultural documentarian working on architecture and cultural heritage in Borneo."
-  >
-
-  <meta name="theme-color" content="#FFFFFF">
-
   <title>Yoris Mangenda</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
   <style>
-    :root {
-      --background: #FFFFFF;
-      --text-primary: #171717;
-      --text-secondary: #858585;
-      --text-hover: #000000;
-      --font-main: "Inter", Helvetica, Arial, sans-serif;
-    }
-
     * {
       box-sizing: border-box;
     }
 
-    html {
-      background: var(--background);
-      color: var(--text-primary);
-      font-family: var(--font-main);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+    :root {
+      --background: #ffffff;
+      --active: #171717;
+      --inactive: #858585;
     }
 
+    html,
     body {
       margin: 0;
-      min-width: 0;
+      width: 100%;
+      height: 100%;
       background: var(--background);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
     }
 
     .homepage {
       position: relative;
       width: 100%;
-      min-height: 100vh;
-      min-height: 100svh;
-      overflow: clip;
+      height: 100vh;
+      height: 100svh;
       background: var(--background);
     }
-
-    /* Name */
 
     .site-name {
       position: absolute;
       top: 28px;
       left: 5.13%;
-      z-index: 2;
       margin: 0;
       font-size: 19px;
-      line-height: 1.3;
-      font-weight: 600;
-      letter-spacing: -0.55px;
+      font-weight: 500;
+      color: var(--active);
     }
 
-    .site-name a {
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    /* Main navigation */
-
-    .main-navigation {
+    .menu-window {
       position: absolute;
       top: 50%;
       right: 10.26%;
       transform: translateY(-50%);
+      height: 190px;
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .menu-list {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
       gap: 5px;
+      transition: transform 350ms ease;
+      will-change: transform;
     }
 
-    .main-navigation a {
+    .menu-item {
       display: block;
-      color: var(--text-secondary);
+      height: 41px;
+      line-height: 41px;
       font-size: 29px;
-      line-height: 1.55;
       font-weight: 600;
-      letter-spacing: -0.8px;
-      text-decoration: none;
-      transition: color 160ms ease;
+      white-space: nowrap;
+      color: var(--inactive);
+      cursor: pointer;
+      transition: color 250ms ease;
     }
 
-    .main-navigation a:hover,
-    .main-navigation a:focus-visible {
-      color: var(--text-hover);
+    .menu-item.active {
+      color: var(--active);
     }
-
-    .main-navigation a:focus-visible,
-    .site-name a:focus-visible {
-      outline: 2px solid var(--text-primary);
-      outline-offset: 4px;
-    }
-
-    /* Copyright */
 
     .copyright {
       position: absolute;
-      left: 4%;
+      left: 5.13%;
       bottom: 20px;
       margin: 0;
-      color: #666666;
       font-size: 9px;
-      line-height: 1.5;
-      font-weight: 400;
+      color: #666666;
     }
-
-    /* Desktop */
-
-    @media (min-width: 768px) {
-      .site-name {
-        top: 32px;
-        left: 5.2%;
-        font-size: 21px;
-      }
-
-      .main-navigation {
-        right: 8%;
-        gap: 2px;
-      }
-
-      .main-navigation a {
-        font-size: clamp(30px, 3vw, 48px);
-        line-height: 1.35;
-        letter-spacing: -1.2px;
-      }
-
-      .copyright {
-        left: 5.2%;
-        bottom: 24px;
-        font-size: 10px;
-      }
-    }
-
-    /* Short screens */
-
-    @media (max-height: 600px) {
-      .site-name {
-        top: 18px;
-      }
-
-      .main-navigation {
-        top: 48%;
-        gap: 0;
-      }
-
-      .main-navigation a {
-        font-size: clamp(23px, 5vh, 29px);
-        line-height: 1.35;
-      }
-
-      .copyright {
-        bottom: 10px;
-      }
-    }
-
-    /* Respect reduced-motion preferences */
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
+      .menu-list,
+      .menu-item {
+        transition: none;
       }
     }
   </style>
 </head>
 
 <body>
+
   <main class="homepage">
 
-    <header>
-      <h1 class="site-name">
-        <a href="./" aria-label="Yoris Mangenda — Home">
-          Yoris Mangenda
-        </a>
-      </h1>
-    </header>
+    <h1 class="site-name">Yoris Mangenda</h1>
 
-    <nav class="main-navigation" aria-label="Main navigation">
-      <a href="./publications.html">publications</a>
-      <a href="./activities.html">activities</a>
-      <a href="./about.html">about</a>
-      <a href="./contacts.html">contacts</a>
+    <nav class="menu-window" aria-label="Main navigation">
+      <div class="menu-list" id="menuList">
+
+        <div class="menu-item" data-name="activities">
+          activities
+        </div>
+
+        <div class="menu-item active" data-name="publications">
+          publications
+        </div>
+
+        <div class="menu-item" data-name="about">
+          about
+        </div>
+
+        <div class="menu-item" data-name="contacts">
+          contacts
+        </div>
+
+      </div>
     </nav>
 
-    <footer>
-      <p class="copyright">
-        © 2026 Yoris Mangenda
-      </p>
-    </footer>
+    <p class="copyright">
+      © Yoris Mangenda 2026
+    </p>
 
   </main>
-</body>
-</html>
+
+  <script>
+    const menuWindow = document.querySelector(".menu-window");
+    const menuList = document.getElementById("menuList");
+    const menuItems = [...document.querySelectorAll(".menu-item")];
+
+    // Urutan menu yang menjadi aktif.
+    const activeSequence = [
+      "publications",
+      "activities",
+      "about",
+      "contacts"
+    ];
+
+    // Publications aktif saat website pertama kali dibuka.
+    let activeIndex = 0;
+
+    function updateMenu() {
+      const activeName = activeSequence[activeIndex];
+
+      const activeItem = menuItems.find(
+        item => item.dataset.name === activeName
+      );
+
+      menuItems.forEach(item => {
+        item.classList.toggle
