@@ -1,1 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Books — Yoris Mangenda</title>
+
+  <meta
+    name="description"
+    content="Books by Yoris Mangenda on Dayak architecture, cultural heritage, and architectural history."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --background: #ffffff;
+      --text: #111111;
+      --muted: #969696;
+      --cover-background: #f2f2f2;
+      --page-padding: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 24px var(--page-padding);
+    }
+
+    .site-name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+    }
+
+    .page-navigation {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .page-navigation a {
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .page-navigation a:hover,
+    .page-navigation a.active {
+      color: var(--text);
+    }
+
+    .page-navigation a.active {
+      font-weight: 700;
+    }
+
+    /* BOOK GRID */
+
+    main {
+      padding: 72px var(--page-padding) 0;
+    }
+
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 28px;
+      row-gap: 40px;
+    }
+
+    .book-card {
+      min-width: 0;
+    }
+
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--cover-background);
+    }
+
+    .book-cover img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .book-card:hover .book-cover img {
+      transform: scale(1.015);
+    }
+
+    .book-title {
+      margin: 13px 0 0;
+      font-size: 15px;
+      line-height: 1.4;
+      font-weight: 600;
+      letter-spacing: -0.25px;
+      overflow-wrap: break-word;
+    }
+
+    .book-year {
+      color: var(--muted);
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    /* MAIN MENU */
+
+    .bottom-navigation {
+      display: flex;
+      justify-content: flex-end;
+      padding: 78px var(--page-padding) 58px;
+    }
+
+    .main-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .main-menu a {
+      color: var(--muted);
+      font-size: clamp(32px, 4.5vw, 48px);
+      line-height: 1.12;
+      font-weight: 700;
+      letter-spacing: -1.8px;
+      transition: color 0.2s ease;
+    }
+
+    .main-menu a:hover,
+    .main-menu a.active {
+      color: var(--text);
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      padding: 0 var(--page-padding) 24px;
+    }
+
+    .copyright {
+      margin: 0;
+      color: #555555;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    /* TABLET */
+
+    @media (min-width: 760px) {
+      :root {
+        --page-padding: 36px;
+      }
+
+      main {
+        padding-top: 84px;
+      }
+
+      .books-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 28px;
+        row-gap: 44px;
+      }
+    }
+
+    /* DESKTOP */
+
+    @media (min-width: 1100px) {
+      :root {
+        --page-padding: 48px;
+      }
+
+      main {
+        padding-top: 100px;
+      }
+
+      .books-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        column-gap: 28px;
+        row-gap: 48px;
+      }
+
+      .bottom-navigation {
+        padding-top: 100px;
+        padding-bottom: 70px;
+      }
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 480px) {
+      :root {
+        --page-padding: 18px;
+      }
+
+      .site-header {
+        padding-top: 20px;
+      }
+
+      .site-name {
+        font-size: 14px;
+      }
+
+      .page-navigation {
+        gap: 16px;
+      }
+
+      .page-navigation a {
+        font-size: 14px;
+      }
+
+      main {
+        padding-top: 48px;
+      }
+
+      .books-grid {
+        column-gap: 14px;
+        row-gap: 28px;
+      }
+
+      .book-title {
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 1.45;
+        letter-spacing: -0.2px;
+      }
+
+      .bottom-navigation {
+        padding-top: 64px;
+        padding-bottom: 48px;
+      }
+
+      .main-menu {
+        gap: 8px;
+      }
+
+      .main-menu a {
+        font-size: 34px;
+        letter-spacing: -1.3px;
+      }
+
+      .site-footer {
+        padding-bottom: 18px;
+      }
+
+      .copyright {
+        font-size: 9px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+
+    <a class="site-name" href="./index.html">
+      Yoris Mangenda
+    </a>
+
+    <nav class="page-navigation" aria-label="Publication navigation">
+      <a
+        class="active"
+        href="./books.html"
+        aria-current="page"
+      >
+        Books
+      </a>
+
+      <a href="./articles.html">
+        Articles
+      </a>
+    </nav>
+
+  </header>
+
+
+  <!-- BOOK COLLECTION -->
+  <main>
+
+    <section
+      class="books-grid"
+      aria-label="Books by Yoris Mangenda"
+    >
+
+      <!-- 1. RUMAH BOSAR -->
+      <article class="book-card">
+
+        <div class="book-cover">
+          <img
+            src="./images/rumah-bosar.png"
+            alt="Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan book cover"
+            fetchpriority="high"
+          >
+        </div>
+
+        <h2 class="book-title">
+          Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan
+          <span class="book-year">(2026)</span>
+        </h2>
+
+      </article>
+
+
+      <!-- 2. DAYAK ARCHITECTURAL HERITAGE -->
+      <article class="book-card">
+
+        <div class="book-cover">
+          <img
+            src="./images/dayak-architectural-heritage.png"
+            alt="Dayak Architectural Heritage: The Diversity of Architecture and Historical Traces book cover"
+            fetchpriority="high"
+          >
+        </div>
+
+        <h2 class="book-title">
+          Dayak Architectural Heritage: The Diversity of Architecture and Historical Traces
+          <span class="book-year">(2024)</span>
+        </h2>
+
+      </article>
+
+
+      <!-- 3. KHAZANAH ARSITEKTUR DAYAK -->
+      <article class="book-card">
+
+        <div class="book-cover">
+          <img
+            src="./images/khazanah-arsitektur-dayak.png"
+            alt="Khazanah Arsitektur Dayak: Keberagaman Arsitektur dan Jejak Sejarahnya book cover"
+            loading="lazy"
+          >
+        </div>
+
+        <h2 class="book-title">
+          Khazanah Arsitektur Dayak: Keberagaman Arsitektur dan Jejak Sejarahnya
+          <span class="book-year">(2024)</span>
+        </h2>
+
+      </article>
+
+
+      <!-- 4. ARSITEKTUR RADAKNG -->
+      <article class="book-card">
+
+        <div class="book-cover">
+          <img
+            src="./images/arsitektur-radakng.png"
+            alt="Arsitektur Radakng: Kehidupan Komunal dan Dayak Kanayatn book cover"
+            loading="lazy"
+          >
+        </div>
+
+        <h2 class="book-title">
+          Arsitektur Radakng: Kehidupan Komunal dan Dayak Kanayatn
+          <span class="book-year">(2020)</span>
+        </h2>
+
+      </article>
+
+    </section>
+
+  </main>
+
+
+  <!-- MAIN WEBSITE NAVIGATION -->
+  <nav class="bottom-navigation" aria-label="Main navigation">
+
+    <div class="main-menu">
+
+      <a
+        class="active"
+        href="./books.html"
+        aria-current="page"
+      >
+        publications
+      </a>
+
+      <a href="./activities.html">
+        activities
+      </a>
+
+      <a href="./about.html">
+        about
+      </a>
+
+      <a href="./contacts.html">
+        contacts
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+
+    <p class="copyright">
+      © 2026 Yoris Mangenda
+    </p>
+
+  </footer>
+
+</body>
+</html>
