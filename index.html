@@ -5,31 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Yoris Mangenda</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-  rel="stylesheet"
->
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  <meta
+    name="description"
+    content="The personal website and research portfolio of Yoris Mangenda."
+  >
 
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
     :root {
       --background: #ffffff;
       --active: #171717;
       --inactive: #858585;
+      --copyright: #666666;
+
+      --page-padding: 5.13%;
+      --menu-right: 10.26%;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     html,
     body {
-      margin: 0;
       width: 100%;
       height: 100%;
-      background: var(--background);
-      font-family: 'Inter', sans-serif;
+      margin: 0;
+    }
+
+    body {
       overflow: hidden;
+      background: var(--background);
+      color: var(--active);
+      font-family: "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     .homepage {
@@ -37,61 +53,149 @@
       width: 100%;
       height: 100vh;
       height: 100svh;
+      min-height: 400px;
+      overflow: hidden;
       background: var(--background);
     }
+
+    /* Name: upper-left corner */
 
     .site-name {
       position: absolute;
       top: 28px;
-      left: 5.13%;
+      left: var(--page-padding);
       margin: 0;
-      font-size: 19px;
+
+      font-size: 16px;
+      line-height: 1.4;
       font-weight: 500;
+      letter-spacing: -0.035em;
       color: var(--active);
     }
 
+    /* Menu: lower-right area */
+
     .menu-window {
       position: absolute;
-      top: 50%;
-      right: 10.26%;
-      transform: translateY(-50%);
-      height: 190px;
+      right: var(--menu-right);
+      bottom: 105px;
+
+      width: max-content;
+      height: 176px;
       overflow: hidden;
+
       touch-action: pan-y;
       user-select: none;
+      -webkit-user-select: none;
+      cursor: grab;
+    }
+
+    .menu-window:active {
+      cursor: grabbing;
     }
 
     .menu-list {
       display: flex;
       flex-direction: column;
-      gap: 5px;
-      transition: transform 350ms ease;
+      gap: 2px;
+
+      width: max-content;
+      transform: translateY(0);
+
+      transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
       will-change: transform;
     }
 
     .menu-item {
       display: block;
-      height: 41px;
-      line-height: 41px;
-      font-size: 29px;
-      font-weight: 600;
-      white-space: nowrap;
+      width: max-content;
+      height: 42px;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+
+      background: transparent;
       color: var(--inactive);
+
+      font-family: inherit;
+      font-size: 27px;
+      line-height: 42px;
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      text-align: left;
+      white-space: nowrap;
+
       cursor: pointer;
-      transition: color 250ms ease;
+      -webkit-tap-highlight-color: transparent;
+
+      transition: color 220ms ease;
     }
 
     .menu-item.active {
       color: var(--active);
     }
 
+    .menu-item:focus-visible {
+      outline: 1px solid var(--active);
+      outline-offset: 4px;
+    }
+
+    /* Copyright: lower-left corner */
+
     .copyright {
       position: absolute;
-      left: 5.13%;
+      left: var(--page-padding);
       bottom: 20px;
+
       margin: 0;
-      font-size: 9px;
-      color: #666666;
+      color: var(--copyright);
+
+      font-size: 10px;
+      line-height: 1.5;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    /* Smaller screens */
+
+    @media (max-width: 480px) {
+      .site-name {
+        top: 28px;
+        font-size: 16px;
+      }
+
+      .menu-window {
+        right: 10.26%;
+        bottom: 105px;
+        height: 176px;
+      }
+
+      .menu-item {
+        height: 42px;
+        font-size: 27px;
+        line-height: 42px;
+      }
+
+      .copyright {
+        bottom: 20px;
+        font-size: 10px;
+      }
+    }
+
+    /* Short screens */
+
+    @media (max-height: 600px) {
+      .menu-window {
+        bottom: 75px;
+        height: 164px;
+      }
+
+      .menu-item {
+        height: 39px;
+        line-height: 39px;
+        font-size: 24px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -104,29 +208,52 @@
 </head>
 
 <body>
-
   <main class="homepage">
 
     <h1 class="site-name">Yoris Mangenda</h1>
 
-    <nav class="menu-window" aria-label="Main navigation">
+    <nav
+      class="menu-window"
+      id="menuWindow"
+      aria-label="Main navigation"
+    >
       <div class="menu-list" id="menuList">
 
-        <div class="menu-item" data-name="activities">
+        <button
+          class="menu-item"
+          type="button"
+          data-name="activities"
+          aria-pressed="false"
+        >
           activities
-        </div>
+        </button>
 
-        <div class="menu-item active" data-name="publications">
+        <button
+          class="menu-item active"
+          type="button"
+          data-name="publications"
+          aria-pressed="true"
+        >
           publications
-        </div>
+        </button>
 
-        <div class="menu-item" data-name="about">
+        <button
+          class="menu-item"
+          type="button"
+          data-name="about"
+          aria-pressed="false"
+        >
           about
-        </div>
+        </button>
 
-        <div class="menu-item" data-name="contacts">
+        <button
+          class="menu-item"
+          type="button"
+          data-name="contacts"
+          aria-pressed="false"
+        >
           contacts
-        </div>
+        </button>
 
       </div>
     </nav>
@@ -138,11 +265,21 @@
   </main>
 
   <script>
-    const menuWindow = document.querySelector(".menu-window");
+    const menuWindow = document.getElementById("menuWindow");
     const menuList = document.getElementById("menuList");
-    const menuItems = [...document.querySelectorAll(".menu-item")];
 
-    // Urutan menu yang menjadi aktif.
+    const menuItems = [
+      ...document.querySelectorAll(".menu-item")
+    ];
+
+    /*
+      Urutan teks:
+      Activities → Publications → About → Contacts
+
+      Urutan menu aktif:
+      Publications → Activities → About → Contacts
+    */
+
     const activeSequence = [
       "publications",
       "activities",
@@ -150,15 +287,142 @@
       "contacts"
     ];
 
-    // Publications aktif saat website pertama kali dibuka.
     let activeIndex = 0;
+    let startX = 0;
+    let startY = 0;
+    let moved = false;
+
+    const SWIPE_THRESHOLD = 25;
+
+    function getItem(name) {
+      return menuItems.find(
+        item => item.dataset.name === name
+      );
+    }
 
     function updateMenu() {
       const activeName = activeSequence[activeIndex];
+      const activeItem = getItem(activeName);
 
-      const activeItem = menuItems.find(
-        item => item.dataset.name === activeName
-      );
+      if (!activeItem) return;
 
       menuItems.forEach(item => {
-        item.classList.toggle
+        const isActive = item.dataset.name === activeName;
+
+        item.classList.toggle("active", isActive);
+        item.setAttribute("aria-pressed", String(isActive));
+      });
+
+      const windowHeight = menuWindow.clientHeight;
+      const itemTop = activeItem.offsetTop;
+      const itemHeight = activeItem.offsetHeight;
+
+      const offset =
+        windowHeight / 2 - itemTop - itemHeight / 2;
+
+      menuList.style.transform = `translateY(${offset}px)`;
+    }
+
+    function moveMenu(direction) {
+      const nextIndex = activeIndex + direction;
+
+      if (
+        nextIndex < 0 ||
+        nextIndex >= activeSequence.length
+      ) {
+        return;
+      }
+
+      activeIndex = nextIndex;
+      updateMenu();
+    }
+
+    function selectMenu(name) {
+      const nextIndex = activeSequence.indexOf(name);
+
+      if (nextIndex === -1) return;
+
+      activeIndex = nextIndex;
+      updateMenu();
+    }
+
+    /* Tap a menu item */
+
+    menuItems.forEach(item => {
+      item.addEventListener("click", () => {
+        if (moved) return;
+        selectMenu(item.dataset.name);
+      });
+    });
+
+    /* Touch gesture */
+
+    menuWindow.addEventListener("touchstart", event => {
+      const touch = event.touches[0];
+
+      startX = touch.clientX;
+      startY = touch.clientY;
+      moved = false;
+    }, { passive: true });
+
+    menuWindow.addEventListener("touchmove", event => {
+      const touch = event.touches[0];
+
+      const deltaX = touch.clientX - startX;
+      const deltaY = touch.clientY - startY;
+
+      if (
+        Math.abs(deltaY) > 10 &&
+        Math.abs(deltaY) > Math.abs(deltaX)
+      ) {
+        moved = true;
+      }
+    }, { passive: true });
+
+    menuWindow.addEventListener("touchend", event => {
+      const touch = event.changedTouches[0];
+
+      const deltaY = touch.clientY - startY;
+      const deltaX = touch.clientX - startX;
+
+      if (
+        Math.abs(deltaY) >= SWIPE_THRESHOLD &&
+        Math.abs(deltaY) > Math.abs(deltaX)
+      ) {
+        moveMenu(deltaY < 0 ? 1 : -1);
+      }
+
+      setTimeout(() => {
+        moved = false;
+      }, 0);
+    }, { passive: true });
+
+    /* Mouse and trackpad */
+
+    menuWindow.addEventListener("wheel", event => {
+      if (Math.abs(event.deltaY) < 10) return;
+
+      event.preventDefault();
+      moveMenu(event.deltaY > 0 ? 1 : -1);
+    }, { passive: false });
+
+    /* Keyboard */
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowDown") {
+        moveMenu(1);
+      }
+
+      if (event.key === "ArrowUp") {
+        moveMenu(-1);
+      }
+    });
+
+    /* Initialize */
+
+    window.addEventListener("resize", updateMenu);
+
+    updateMenu();
+  </script>
+</body>
+</html>
