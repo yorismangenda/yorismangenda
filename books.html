@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Books — Yoris Mangenda</title>
 
   <meta
     name="description"
-    content="Books by Yoris Mangenda on Dayak architecture, cultural heritage, and architectural history."
+    content="Books by Yoris Mangenda on architecture, cultural heritage, and history in Borneo."
   >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,11 +22,10 @@
 
   <style>
     :root {
-      --background: #ffffff;
       --text: #111111;
       --muted: #969696;
       --cover-background: #f2f2f2;
-      --page-padding: 28px;
+      --page-padding: 44px;
     }
 
     * {
@@ -38,7 +38,7 @@
 
     body {
       margin: 0;
-      background: var(--background);
+      background: #ffffff;
       color: var(--text);
       font-family: "Inter", sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -60,9 +60,9 @@
 
     .site-name {
       font-size: 16px;
+      line-height: 1.4;
       font-weight: 700;
       letter-spacing: -0.5px;
-      white-space: nowrap;
     }
 
     .page-navigation {
@@ -75,7 +75,6 @@
       color: var(--muted);
       font-size: 16px;
       font-weight: 600;
-      transition: color 0.2s ease;
     }
 
     .page-navigation a:hover,
@@ -87,7 +86,7 @@
       font-weight: 700;
     }
 
-    /* BOOK COLLECTION */
+    /* BOOK GRID */
 
     main {
       padding: 65px var(--page-padding) 0;
@@ -141,12 +140,12 @@
       white-space: nowrap;
     }
 
-    /* MAIN WEBSITE NAVIGATION */
+    /* BOTTOM NAVIGATION */
 
     .bottom-navigation {
       display: flex;
       justify-content: flex-end;
-      padding: 48px var(--page-padding) 30px;
+      padding: 36px var(--page-padding) 24px;
     }
 
     .main-menu {
@@ -157,12 +156,13 @@
     }
 
     .main-menu a {
+      display: block;
       color: var(--muted);
-      font-size: clamp(30px, 3.2vw, 40px);
+      font-size: 40px;
       line-height: 1.12;
       font-weight: 700;
       letter-spacing: -1.5px;
-      transition: color 0.2s ease;
+      white-space: nowrap;
     }
 
     .main-menu a:hover,
@@ -185,41 +185,23 @@
 
     /* TABLET */
 
-    @media (min-width: 760px) {
+    @media (min-width: 760px) and (max-width: 1099px) {
       :root {
         --page-padding: 36px;
       }
 
-      main {
-        padding-top: 65px;
-      }
-
       .books-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
-        column-gap: 24px;
-        row-gap: 32px;
       }
 
-      .book-title {
-        font-size: 14px;
+      .main-menu a {
+        font-size: 36px;
       }
     }
 
     /* DESKTOP */
 
     @media (min-width: 1100px) {
-      :root {
-        --page-padding: 44px;
-      }
-
-      .site-header {
-        padding-top: 20px;
-      }
-
-      main {
-        padding-top: 65px;
-      }
-
       .books-grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         column-gap: 24px;
@@ -235,19 +217,37 @@
         padding-top: 36px;
         padding-bottom: 24px;
       }
+    }
+
+    /* SHORT DESKTOP SCREENS */
+
+    @media (min-width: 761px) and (max-height: 850px) {
+      main {
+        padding-top: 42px;
+      }
+
+      .bottom-navigation {
+        padding-top: 28px;
+        padding-bottom: 20px;
+      }
+
+      .main-menu {
+        gap: 6px;
+      }
 
       .main-menu a {
-        font-size: 40px;
+        font-size: 34px;
+        line-height: 1.08;
       }
 
       .site-footer {
-        padding-bottom: 18px;
+        padding-bottom: 12px;
       }
     }
 
     /* MOBILE */
 
-    @media (max-width: 480px) {
+    @media (max-width: 760px) {
       :root {
         --page-padding: 18px;
       }
@@ -282,7 +282,6 @@
         margin-top: 10px;
         font-size: 12px;
         line-height: 1.45;
-        letter-spacing: -0.2px;
       }
 
       .bottom-navigation {
@@ -308,8 +307,6 @@
         font-size: 9px;
       }
     }
-
-    /* ACCESSIBILITY */
 
     @media (prefers-reduced-motion: reduce) {
       html {
@@ -358,19 +355,16 @@
 
   <main>
 
-    <section
-      class="books-grid"
-      aria-label="Books by Yoris Mangenda"
-    >
+    <section class="books-grid" aria-label="Books by Yoris Mangenda">
 
-      <!-- BOOK 1: RUMAH BOSAR -->
+      <!-- RUMAH BOSAR -->
 
       <article class="book-card">
 
         <div class="book-cover">
           <img
-            src="./images/rumah-bosar.png"
-            alt="Cover of Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan"
+            src="./images/7FD8637D-A2B8-417B-9599-6B64A17F0D84.PNG"
+            alt="Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan"
             fetchpriority="high"
           >
         </div>
@@ -383,14 +377,14 @@
       </article>
 
 
-      <!-- BOOK 2: DAYAK ARCHITECTURAL HERITAGE -->
+      <!-- DAYAK ARCHITECTURAL HERITAGE -->
 
       <article class="book-card">
 
         <div class="book-cover">
           <img
-            src="./images/dayak-architectural-heritage.png"
-            alt="Cover of Dayak Architectural Heritage: The Diversity of Architecture and Historical Traces"
+            src="./images/3310A5C4-9C8A-4C7D-B3F2-507647B4FD0A.PNG"
+            alt="Dayak Architectural Heritage: The Diversity of Architecture and Historical Traces"
             fetchpriority="high"
           >
         </div>
@@ -403,14 +397,14 @@
       </article>
 
 
-      <!-- BOOK 3: KHAZANAH ARSITEKTUR DAYAK -->
+      <!-- KHAZANAH ARSITEKTUR DAYAK -->
 
       <article class="book-card">
 
         <div class="book-cover">
           <img
-            src="./images/khazanah-arsitektur-dayak.png"
-            alt="Cover of Khazanah Arsitektur Dayak: Keberagaman Arsitektur dan Jejak Sejarahnya"
+            src="./images/406A88A1-51A8-4D10-AF3D-63F94B24BC7F.PNG"
+            alt="Khazanah Arsitektur Dayak: Keberagaman Arsitektur dan Jejak Sejarahnya"
             loading="lazy"
           >
         </div>
@@ -423,14 +417,14 @@
       </article>
 
 
-      <!-- BOOK 4: ARSITEKTUR RADAKNG -->
+      <!-- ARSITEKTUR RADAKNG -->
 
       <article class="book-card">
 
         <div class="book-cover">
           <img
-            src="./images/arsitektur-radakng.png"
-            alt="Cover of Arsitektur Radakng: Kehidupan Komunal dan Dayak Kanayatn"
+            src="./images/9DA06347-871D-4249-9797-C24915600382.PNG"
+            alt="Arsitektur Radakng: Kehidupan Komunal dan Dayak Kanayatn"
             loading="lazy"
           >
         </div>
@@ -447,35 +441,36 @@
   </main>
 
 
-<!-- MAIN WEBSITE NAVIGATION -->
+  <!-- MAIN WEBSITE NAVIGATION -->
 
-<nav class="bottom-navigation" aria-label="Main navigation">
+  <nav class="bottom-navigation" aria-label="Main navigation">
 
-  <div class="main-menu">
+    <div class="main-menu">
 
-    <a href="./activities.html">
-      activities
-    </a>
+      <a href="./activities.html">
+        activities
+      </a>
 
-    <a
-      class="active"
-      href="./books.html"
-      aria-current="page"
-    >
-      publications
-    </a>
+      <a
+        class="active"
+        href="./books.html"
+        aria-current="page"
+      >
+        publications
+      </a>
 
-    <a href="./about.html">
-      about
-    </a>
+      <a href="./about.html">
+        about
+      </a>
 
-    <a href="./contacts.html">
-      contacts
-    </a>
+      <a href="./contacts.html">
+        contacts
+      </a>
 
-  </div>
+    </div>
 
-</nav>
+  </nav>
+
 
   <!-- FOOTER -->
 
@@ -488,4 +483,5 @@
   </footer>
 
 </body>
+
 </html>
