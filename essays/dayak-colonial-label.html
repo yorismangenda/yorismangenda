@@ -166,20 +166,13 @@
       color: #555555;
     }
 
-    .abstract {
-      margin-bottom: 48px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid var(--line);
-    }
+.abstract {
+  margin-bottom: 48px;
+}
 
-    .abstract-label {
-      margin: 0 0 12px;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+.abstract-label {
+  display: none;
+}
 
     .essay-content p {
       margin: 0 0 19px;
@@ -284,26 +277,21 @@
 
     /* FOOTER */
 
-    .site-footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 24px 5.5%;
-      border-top: 1px solid var(--line);
-    }
+.site-footer {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 23px 6%;
+}
 
-    .footer-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-    }
+.footer-nav {
+  gap: 14px;
+}
 
-    .footer-nav a,
-    .copyright {
-      color: #777777;
-      font-size: 11px;
-      text-decoration: none;
-    }
+.footer-nav a,
+.copyright {
+  font-size: 10px;
+}
 
     /* RESPONSIVE MOBILE */
 
@@ -421,11 +409,9 @@
         in Postcolonial Borneo
       </h1>
 
-      <p class="essay-author">
-        Yoris Mangenda
-        <br>
-        <span class="essay-year">2026</span>
-      </p>
+<p class="essay-author">
+  Yoris Mangenda <span class="essay-year">· 2026</span>
+</p>
 
       <nav class="essay-navigation" aria-label="Essay sections">
         <a href="#body-text" class="active">BODY TEXT</a>
@@ -742,18 +728,20 @@
 
   </main>
 
-  <footer class="site-footer">
+<footer class="site-footer">
 
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="../books.html">Publications</a>
-      <a href="../activities.html">Activities</a>
-      <a href="../about.html">About</a>
-      <a href="../contacts.html">Contacts</a>
-    </nav>
+  <nav class="footer-nav" aria-label="Footer navigation">
+    <a href="../books.html">Publications</a>
+    <a href="../activities.html">Activities</a>
+    <a href="../about.html">About</a>
+    <a href="../contacts.html">Contacts</a>
+  </nav>
 
-    <span class="copyright">
-      © 2026 Yoris Mangenda
-    </span>
+  <span class="copyright">
+    © 2026 Yoris Mangenda
+  </span>
+
+</footer>
 
   </footer>
 
