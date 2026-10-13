@@ -8,7 +8,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     * {
@@ -23,13 +26,15 @@
       margin: 0;
       background: #fff;
       color: #111;
-      font-family: 'Inter', sans-serif;
+      font-family: "Inter", sans-serif;
     }
 
     a {
       color: inherit;
       text-decoration: none;
     }
+
+    /* HEADER */
 
     .site-header {
       padding: 16px 22px;
@@ -58,35 +63,18 @@
       color: #111;
     }
 
+    /* MAIN */
+
     main {
       width: 100%;
-      padding: 30px 22px 120px;
+      padding: 20px 22px 110px;
     }
+
+    /* FLIPBOOK */
 
     .reader-section {
       width: 100%;
       margin: 0 auto;
-    }
-
-    .reader-heading {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 22px;
-    }
-
-    .reader-heading h1 {
-      margin: 0;
-      font-size: clamp(22px, 3vw, 34px);
-      line-height: 1.2;
-      font-weight: 600;
-    }
-
-    .sample-label {
-      color: #777;
-      font-size: 12px;
-      white-space: nowrap;
     }
 
     .flipbook-area {
@@ -107,10 +95,12 @@
       overflow: hidden;
     }
 
-    #flipbook .page canvas {
+    #flipbook .page img {
       display: block;
       width: 100%;
       height: 100%;
+      object-fit: contain;
+      background: #fff;
     }
 
     .loading {
@@ -118,10 +108,11 @@
       text-align: center;
       color: #777;
       font-size: 14px;
+      line-height: 1.6;
     }
 
     .reader-controls {
-      margin: 22px auto 0;
+      margin: 20px auto 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -150,29 +141,46 @@
       text-align: center;
     }
 
+    .error-message {
+      display: none;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* BOOK INFORMATION */
+
     .book-information {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 48px;
-      margin-top: 100px;
-      padding-top: 0;
+      margin-top: 90px;
+      align-items: start;
+    }
+
+    .book-details {
+      min-width: 0;
     }
 
     .book-title {
-      margin: 0;
-      font-size: clamp(20px, 2.3vw, 28px);
-      line-height: 1.3;
-      font-weight: 600;
-      max-width: 520px;
+      margin: 0 0 42px;
+      max-width: 600px;
+      font-size: clamp(22px, 2.5vw, 36px);
+      line-height: 1.25;
+      font-weight: 700;
     }
 
     .metadata {
       margin: 0;
       display: grid;
-      grid-template-columns: 130px 12px minmax(0, 1fr);
+      grid-template-columns: 150px 12px minmax(0, 1fr);
       align-content: start;
-      row-gap: 7px;
-      font-size: 12px;
+      row-gap: 6px;
+      font-size: 15px;
       line-height: 1.5;
     }
 
@@ -181,17 +189,30 @@
       margin: 0;
     }
 
-    .metadata dd {
-      overflow-wrap: anywhere;
-    }
-
     .metadata .colon {
       text-align: center;
     }
 
-    .metadata a {
-      color: #4263a3;
+    .metadata dd:last-child {
+      overflow-wrap: anywhere;
     }
+
+    .book-description {
+      min-width: 0;
+      color: #444;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .book-description p {
+      margin: 0 0 14px;
+    }
+
+    .book-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* FOOTER */
 
     .site-footer {
       position: fixed;
@@ -202,13 +223,14 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.97);
       z-index: 10;
     }
 
     .copyright {
       font-size: 9px;
       color: #555;
+      white-space: nowrap;
     }
 
     .bottom-nav {
@@ -226,20 +248,37 @@
       color: #111;
     }
 
-    .error-message {
-      display: none;
-      max-width: 650px;
-      margin: 30px auto;
-      padding: 20px;
-      color: #555;
-      font-size: 14px;
-      line-height: 1.7;
-      text-align: center;
+    /* TABLET */
+
+    @media (max-width: 900px) {
+      .book-information {
+        gap: 30px;
+      }
+
+      .metadata {
+        grid-template-columns: 115px 10px minmax(0, 1fr);
+        font-size: 13px;
+      }
+
+      .book-description {
+        font-size: 14px;
+      }
+
+      .bottom-nav {
+        gap: 12px;
+        font-size: 16px;
+      }
     }
 
-    @media (max-width: 700px) {
+    /* MOBILE */
+
+    @media (max-width: 600px) {
       .site-header {
         padding: 16px;
+      }
+
+      .site-name {
+        font-size: 15px;
       }
 
       .top-nav {
@@ -248,14 +287,7 @@
       }
 
       main {
-        padding: 35px 16px 115px;
-      }
-
-      .reader-heading {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 16px;
+        padding: 20px 16px 120px;
       }
 
       .flipbook-area {
@@ -264,36 +296,43 @@
 
       .book-information {
         grid-template-columns: 1fr;
-        gap: 24px;
-        margin-top: 65px;
+        gap: 30px;
+        margin-top: 55px;
+      }
+
+      .book-title {
+        margin-bottom: 28px;
+        font-size: 25px;
       }
 
       .metadata {
-        grid-template-columns: 105px 12px minmax(0, 1fr);
+        grid-template-columns: 115px 10px minmax(0, 1fr);
+        font-size: 13px;
+      }
+
+      .book-description {
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .reader-controls {
+        gap: 20px;
       }
 
       .site-footer {
         padding: 12px 16px;
-        align-items: flex-end;
-        gap: 12px;
+        gap: 10px;
+      }
+
+      .copyright {
+        font-size: 8px;
       }
 
       .bottom-nav {
         flex-wrap: wrap;
         justify-content: flex-end;
-        gap: 8px 12px;
+        gap: 7px 12px;
         font-size: 13px;
-      }
-
-      .copyright {
-        font-size: 8px;
-        white-space: nowrap;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
       }
     }
   </style>
@@ -301,8 +340,12 @@
 
 <body>
 
+  <!-- HEADER -->
+
   <header class="site-header">
-    <a class="site-name" href="./index.html">Yoris Mangenda</a>
+    <a class="site-name" href="./index.html">
+      Yoris Mangenda
+    </a>
 
     <nav class="top-nav" aria-label="Top navigation">
       <a class="active" href="./books.html">Books</a>
@@ -310,25 +353,25 @@
     </nav>
   </header>
 
+  <!-- MAIN CONTENT -->
+
   <main>
     <section class="reader-section">
 
-      <div class="reader-heading">
-        <h1>Rumah Bosar</h1>
-        <span class="sample-label">Selected pages · Indonesian</span>
-      </div>
+      <!-- FLIPBOOK -->
 
       <div class="flipbook-area">
+
         <div id="loading" class="loading">
           Preparing book preview...
         </div>
 
         <div id="flipbook" style="display: none;"></div>
+
       </div>
 
       <div id="reader-error" class="error-message">
-        The book preview could not be loaded. Please refresh the page
-        or check your internet connection.
+        The book preview could not be loaded.
       </div>
 
       <div class="reader-controls">
@@ -343,54 +386,103 @@
         </button>
       </div>
 
+      <!-- BOOK INFORMATION -->
+
       <section class="book-information">
 
-        <div>
-          <h2 class="book-title">
+        <!-- LEFT COLUMN: TITLE AND METADATA -->
+
+        <div class="book-details">
+
+          <h1 class="book-title">
             Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan
-          </h2>
+          </h1>
+
+          <dl class="metadata">
+
+            <dt>Authors</dt>
+            <dd class="colon">:</dd>
+            <dd>Yoris Mangenda, Sheila Nurfajrina</dd>
+
+            <dt>Editor</dt>
+            <dd class="colon">:</dd>
+            <dd>Mohammad Cahyo Novianto</dd>
+
+            <dt>Publisher</dt>
+            <dd class="colon">:</dd>
+            <dd>OMAH Library</dd>
+
+            <dt>Publication date</dt>
+            <dd class="colon">:</dd>
+            <dd>June, 2026</dd>
+
+            <dt>ISBN</dt>
+            <dd class="colon">:</dd>
+            <dd>978-623-89171-9-1</dd>
+
+            <dt>Language</dt>
+            <dd class="colon">:</dd>
+            <dd>Bahasa Indonesia</dd>
+
+            <dt>Format</dt>
+            <dd class="colon">:</dd>
+            <dd>Paperback, monochrome</dd>
+
+            <dt>Print length</dt>
+            <dd class="colon">:</dd>
+            <dd>145 pages</dd>
+
+            <dt>Dimensions</dt>
+            <dd class="colon">:</dd>
+            <dd>14,8 × 21 cm</dd>
+
+          </dl>
+
         </div>
 
-        <dl class="metadata">
-          <dt>Authors</dt>
-          <dd class="colon">:</dd>
-          <dd>Yoris Mangenda, Sheila Nurfajrina</dd>
+        <!-- RIGHT COLUMN: BOOK DESCRIPTION -->
 
-          <dt>Editor</dt>
-          <dd class="colon">:</dd>
-          <dd>Mohammad Cahyo Novianto</dd>
+        <div class="book-description">
 
-          <dt>Publisher</dt>
-          <dd class="colon">:</dd>
-          <dd>Realrich Architecture Workshop</dd>
+          <p>
+            Rumah Bosar Mandiangin merupakan salah satu bentuk arsitektur
+            Dayak Pesaguan yang tidak hanya hadir sebagai bangunan, tetapi
+            sebagai pengetahuan yang hidup dan diwariskan lintas generasi.
+            Selama lebih dari satu abad, bangunan ini mengalami perpindahan,
+            pembongkaran, dan perakitan ulang, namun tetap mempertahankan
+            sistem arsitektur serta praktik ketukangan yang menyertainya.
+          </p>
 
-          <dt>Publication date</dt>
-          <dd class="colon">:</dd>
-          <dd>July 6, 2026</dd>
+          <p>
+            Buku ini mengajak pembaca memahami Rumah Bosar tidak hanya
+            sebagai bentuk fisik, tetapi sebagai bagian dari kehidupan
+            sosial dan budaya masyarakat. Disusun berdasarkan wawancara,
+            catatan lokal, dan dokumentasi lapangan, buku ini membahas
+            sejarah, fungsi, bentuk dan tata ruang, hingga proses perakitan
+            serta sistem konstruksi kayu yang membentuknya.
+          </p>
 
-          <dt>ISBN</dt>
-          <dd class="colon">:</dd>
-          <dd>978-623-89171-8-1</dd>
+          <p>
+            Melalui buku ini, Rumah Bosar dibaca sebagai ruang tempat
+            bertemunya tradisi, keterampilan, dan pengetahuan yang terus
+            hidup dalam masyarakat, sekaligus sebagai bagian dari kekayaan
+            arsitektur Nusantara yang perlu dipahami dan dirawat.
+          </p>
 
-          <dt>Language</dt>
-          <dd class="colon">:</dd>
-          <dd>Bahasa Indonesia</dd>
-
-          <dt>Format</dt>
-          <dd class="colon">:</dd>
-          <dd>Paperback, monochrome</dd>
-
-          <dt>Print length</dt>
-          <dd class="colon">:</dd>
-          <dd>382 pages</dd>
-        </dl>
+        </div>
 
       </section>
+
     </section>
   </main>
 
+  <!-- FOOTER -->
+
   <footer class="site-footer">
-    <div class="copyright">© 2026 Yoris Mangenda</div>
+
+    <div class="copyright">
+      © 2026 Yoris Mangenda
+    </div>
 
     <nav class="bottom-nav" aria-label="Main navigation">
       <a class="active" href="./books.html">Publications</a>
@@ -398,18 +490,24 @@
       <a href="./about.html">About</a>
       <a href="./contacts.html">Contacts</a>
     </nav>
+
   </footer>
+
+  <!-- LIBRARIES -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 
+  <!-- FLIPBOOK SCRIPT -->
+
   <script>
-    const PDF_URL = "./rumah-bosar-sample.pdf";
+    const PDF_URL = "./rumah-bosar.pdf";
 
     const loadingElement = document.getElementById("loading");
     const flipbookElement = document.getElementById("flipbook");
     const errorElement = document.getElementById("reader-error");
     const counterElement = document.getElementById("page-counter");
+
     const previousButton = document.getElementById("prev-button");
     const nextButton = document.getElementById("next-button");
 
@@ -425,28 +523,33 @@
       loadingElement.style.display = "none";
       flipbookElement.style.display = "none";
       errorElement.style.display = "block";
-
-      if (message) {
-        errorElement.textContent = message;
-      }
+      errorElement.textContent = message;
+      counterElement.textContent = "Unavailable";
     }
 
     function updateControls() {
       if (!pageFlip) return;
 
-      const current = pageFlip.getCurrentPageIndex();
+      const currentIndex = pageFlip.getCurrentPageIndex();
 
       counterElement.textContent =
-        (current + 1) + " / " + totalPages;
+        (currentIndex + 1) + " / " + totalPages;
 
-      previousButton.disabled = current <= 0;
-      nextButton.disabled = current >= totalPages - 1;
+      previousButton.disabled = currentIndex <= 0;
+      nextButton.disabled = currentIndex >= totalPages - 1;
     }
 
     async function createFlipbook() {
       try {
-        if (!window.pdfjsLib || !window.St || !window.St.PageFlip) {
-          throw new Error("The flipbook libraries could not be loaded.");
+        if (
+          !window.pdfjsLib ||
+          !window.St ||
+          !window.St.PageFlip
+        ) {
+          throw new Error(
+            "The flipbook libraries could not be loaded. " +
+            "Please check your internet connection."
+          );
         }
 
         const pdf = await pdfjsLib.getDocument(PDF_URL).promise;
@@ -459,31 +562,33 @@
         const pageRatio =
           originalViewport.width / originalViewport.height;
 
+        const isMobile = window.innerWidth <= 600;
+
         const availableWidth = Math.min(
           window.innerWidth - 44,
           1100
         );
 
-        const mobile = window.innerWidth <= 700;
-
         let pageWidth;
-        let pageHeight;
 
-        if (mobile) {
-          pageWidth = Math.floor(availableWidth);
-          pageHeight = Math.floor(pageWidth / pageRatio);
+        if (isMobile) {
+          pageWidth = Math.min(availableWidth, 440);
         } else {
-          pageWidth = Math.floor(availableWidth / 2);
-          pageHeight = Math.floor(pageWidth / pageRatio);
+          pageWidth = Math.min(availableWidth / 2, 550);
         }
 
-        pageWidth = Math.max(220, Math.min(pageWidth, 550));
-        pageHeight = Math.floor(pageWidth / pageRatio);
+        pageWidth = Math.max(220, pageWidth);
 
+        const pageHeight = pageWidth / pageRatio;
         const renderScale = 1.5;
-        const pages = [];
 
-        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+        const pageElements = [];
+
+        for (
+          let pageNumber = 1;
+          pageNumber <= totalPages;
+          pageNumber++
+        ) {
           const pdfPage = await pdf.getPage(pageNumber);
 
           const viewport = pdfPage.getViewport({
@@ -505,17 +610,17 @@
           pageElement.className = "page";
 
           const image = document.createElement("img");
+
           image.src = canvas.toDataURL("image/jpeg", 0.92);
           image.alt = "Rumah Bosar sample page " + pageNumber;
-          image.style.width = "100%";
-          image.style.height = "100%";
-          image.style.objectFit = "contain";
 
           pageElement.appendChild(image);
-          pages.push(pageElement);
+          pageElements.push(pageElement);
         }
 
-        pages.forEach(page => flipbookElement.appendChild(page));
+        pageElements.forEach(page => {
+          flipbookElement.appendChild(page);
+        });
 
         loadingElement.style.display = "none";
         flipbookElement.style.display = "block";
@@ -523,17 +628,23 @@
         pageFlip = new St.PageFlip(flipbookElement, {
           width: pageWidth,
           height: pageHeight,
-          size: "stretch",
+
+          size: "fixed",
           minWidth: 220,
           maxWidth: 550,
           minHeight: 300,
           maxHeight: 850,
+
           showCover: true,
-          usePortrait: mobile,
+          usePortrait: isMobile,
+
           drawShadow: true,
           flippingTime: 700,
           mobileScrollSupport: true,
-          maxShadowOpacity: 0.18
+          maxShadowOpacity: 0.18,
+
+          startPage: 0,
+          autoSize: true
         });
 
         pageFlip.loadFromHTML(
@@ -557,7 +668,8 @@
 
         showError(
           "The preview could not be loaded. Please check that " +
-          "rumah-bosar-sample.pdf is in the repository's root folder."
+          "rumah-bosar.pdf is in the repository's root folder, " +
+          "and try refreshing the page."
         );
       }
     }
