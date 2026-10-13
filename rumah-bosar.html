@@ -8,31 +8,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-.reader-heading {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  margin-bottom: 12px;
-  padding-right: 4px;
-}
-
-.sample-label {
-  color: #777;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
-@media (max-width: 600px) {
-  .sample-label {
-    font-size: 9px;
-  }
-}
-}
+  <style>
     * {
       box-sizing: border-box;
     }
@@ -56,6 +34,7 @@
     /* HEADER */
 
     .site-header {
+      width: 100%;
       padding: 16px 22px;
       display: flex;
       justify-content: space-between;
@@ -69,9 +48,9 @@
 
     .top-nav {
       display: flex;
-      gap: 22px;
-      font-size: 20px;
-      font-weight: 700;
+      gap: 18px;
+      font-size: 18px;
+      font-weight: 600;
     }
 
     .top-nav a {
@@ -86,7 +65,24 @@
 
     main {
       width: 100%;
-      padding: 20px 22px 110px;
+      padding: 22px 22px 110px;
+    }
+
+    /* SAMPLE LABEL */
+
+    .reader-heading {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-bottom: 12px;
+      padding-right: 4px;
+    }
+
+    .sample-label {
+      color: #777;
+      font-size: 12px;
+      line-height: 1.4;
+      white-space: nowrap;
     }
 
     /* FLIPBOOK */
@@ -123,6 +119,7 @@
     }
 
     .loading {
+      width: 100%;
       padding: 80px 20px;
       text-align: center;
       color: #777;
@@ -156,7 +153,7 @@
 
     #page-counter {
       color: #777;
-      min-width: 85px;
+      min-width: 70px;
       text-align: center;
     }
 
@@ -175,10 +172,10 @@
 
     .book-information {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 48px;
-      margin-top: 90px;
       align-items: start;
+      margin-top: 90px;
     }
 
     .book-details {
@@ -216,19 +213,16 @@
       overflow-wrap: anywhere;
     }
 
-.book-description {
-  min-width: 0;
-  color: #444;
-  font-size: 16px;
-  line-height: 1.35;
-  padding-top: 116px;
-}
+    .book-description {
+      min-width: 0;
+      padding-top: 116px;
+      color: #444;
+      font-size: 16px;
+      line-height: 1.35;
     }
 
-.book-description {
-  font-size: 14px;
-  padding-top: 116px;
-}
+    .book-description p {
+      margin: 0 0 14px;
     }
 
     .book-description p:last-child {
@@ -285,6 +279,7 @@
 
       .book-description {
         font-size: 14px;
+        padding-top: 116px;
       }
 
       .bottom-nav {
@@ -306,11 +301,20 @@
 
       .top-nav {
         gap: 14px;
-        font-size: 16px;
+        font-size: 15px;
       }
 
       main {
         padding: 20px 16px 120px;
+      }
+
+      .reader-heading {
+        margin-bottom: 8px;
+        padding-right: 0;
+      }
+
+      .sample-label {
+        font-size: 9px;
       }
 
       .flipbook-area {
@@ -318,7 +322,7 @@
       }
 
       .book-information {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 30px;
         margin-top: 55px;
       }
@@ -334,6 +338,7 @@
       }
 
       .book-description {
+        padding-top: 0;
         font-size: 14px;
         line-height: 1.5;
       }
@@ -355,7 +360,7 @@
         flex-wrap: wrap;
         justify-content: flex-end;
         gap: 7px 12px;
-        font-size: 12px;
+        font-size: 13px;
       }
     }
   </style>
@@ -366,13 +371,11 @@
   <!-- HEADER -->
 
   <header class="site-header">
-    <a class="site-name" href="./index.html">
-      Yoris Mangenda
-    </a>
+    <a class="site-name" href="./index.html">Yoris Mangenda</a>
 
     <nav class="top-nav" aria-label="Top navigation">
-      <a class="active" href="./books.html">books</a>
-      <a href="./essays.html">essays</a>
+      <a class="active" href="./books.html">Books</a>
+      <a href="./articles.html">Essays</a>
     </nav>
   </header>
 
@@ -381,20 +384,20 @@
   <main>
     <section class="reader-section">
 
-     <!-- FLIPBOOK -->
+      <!-- SAMPLE LABEL -->
 
-<div class="reader-heading">
-  <span class="sample-label">Selected pages · Indonesian</span>
-</div>
+      <div class="reader-heading">
+        <span class="sample-label">Selected pages · Indonesian</span>
+      </div>
 
-<div class="flipbook-area">
+      <!-- FLIPBOOK -->
 
+      <div class="flipbook-area">
         <div id="loading" class="loading">
           Preparing book preview...
         </div>
 
         <div id="flipbook" style="display: none;"></div>
-
       </div>
 
       <div id="reader-error" class="error-message">
@@ -417,10 +420,9 @@
 
       <section class="book-information">
 
-        <!-- LEFT COLUMN: TITLE AND METADATA -->
+        <!-- LEFT COLUMN -->
 
         <div class="book-details">
-
           <h1 class="book-title">
             Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan
           </h1>
@@ -464,10 +466,9 @@
             <dd>14,8 × 21 cm</dd>
 
           </dl>
-
         </div>
 
-        <!-- RIGHT COLUMN: BOOK DESCRIPTION -->
+        <!-- RIGHT COLUMN -->
 
         <div class="book-description">
 
@@ -499,25 +500,20 @@
         </div>
 
       </section>
-
     </section>
   </main>
 
   <!-- FOOTER -->
 
   <footer class="site-footer">
-
-    <div class="copyright">
-      © 2026 Yoris Mangenda
-    </div>
+    <div class="copyright">© 2026 Yoris Mangenda</div>
 
     <nav class="bottom-nav" aria-label="Main navigation">
-      <a class="active" href="./books.html">publications</a>
-      <a href="./activities.html">activities</a>
-      <a href="./about.html">about</a>
-      <a href="./contacts.html">contacts</a>
+      <a class="active" href="./books.html">Publications</a>
+      <a href="./activities.html">Activities</a>
+      <a href="./about.html">About</a>
+      <a href="./contacts.html">Contacts</a>
     </nav>
-
   </footer>
 
   <!-- LIBRARIES -->
@@ -533,8 +529,8 @@
     const loadingElement = document.getElementById("loading");
     const flipbookElement = document.getElementById("flipbook");
     const errorElement = document.getElementById("reader-error");
-    const counterElement = document.getElementById("page-counter");
 
+    const counterElement = document.getElementById("page-counter");
     const previousButton = document.getElementById("prev-button");
     const nextButton = document.getElementById("next-button");
 
@@ -568,14 +564,10 @@
 
     async function createFlipbook() {
       try {
-        if (
-          !window.pdfjsLib ||
-          !window.St ||
-          !window.St.PageFlip
-        ) {
+        if (!window.pdfjsLib || !window.St || !window.St.PageFlip) {
           throw new Error(
             "The flipbook libraries could not be loaded. " +
-            "Please check your internet connection."
+            "Check your internet connection and reload the page."
           );
         }
 
@@ -591,20 +583,14 @@
 
         const isMobile = window.innerWidth <= 600;
 
-        const availableWidth = Math.min(
-          window.innerWidth - 44,
-          1100
+        const availableWidth = Math.max(
+          220,
+          Math.min(window.innerWidth - 44, 1100)
         );
 
-        let pageWidth;
-
-        if (isMobile) {
-          pageWidth = Math.min(availableWidth, 440);
-        } else {
-          pageWidth = Math.min(availableWidth / 2, 550);
-        }
-
-        pageWidth = Math.max(220, pageWidth);
+        let pageWidth = isMobile
+          ? Math.min(availableWidth, 440)
+          : Math.min(availableWidth / 2, 550);
 
         const pageHeight = pageWidth / pageRatio;
         const renderScale = 1.5;
@@ -637,7 +623,6 @@
           pageElement.className = "page";
 
           const image = document.createElement("img");
-
           image.src = canvas.toDataURL("image/jpeg", 0.92);
           image.alt = "Rumah Bosar sample page " + pageNumber;
 
@@ -655,21 +640,17 @@
         pageFlip = new St.PageFlip(flipbookElement, {
           width: pageWidth,
           height: pageHeight,
-
           size: "fixed",
           minWidth: 220,
           maxWidth: 550,
           minHeight: 300,
           maxHeight: 850,
-
           showCover: true,
           usePortrait: isMobile,
-
           drawShadow: true,
           flippingTime: 700,
           mobileScrollSupport: true,
           maxShadowOpacity: 0.18,
-
           startPage: 0,
           autoSize: true
         });
@@ -696,7 +677,7 @@
         showError(
           "The preview could not be loaded. Please check that " +
           "rumah-bosar.pdf is in the repository's root folder, " +
-          "and try refreshing the page."
+          "and that your internet connection is working."
         );
       }
     }
