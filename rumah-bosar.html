@@ -1,1 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Rumah Bosar — Yoris Mangenda</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: #111;
+      font-family: 'Inter', sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      padding: 16px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .site-name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .top-nav {
+      display: flex;
+      gap: 22px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .top-nav a {
+      color: #999;
+    }
+
+    .top-nav a.active {
+      color: #111;
+    }
+
+    main {
+      width: 100%;
+      padding: 30px 22px 120px;
+    }
+
+    .reader-section {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .reader-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .reader-heading h1 {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .sample-label {
+      color: #777;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .flipbook-area {
+      width: 100%;
+      min-height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #flipbook {
+      margin: 0 auto;
+    }
+
+    #flipbook .page {
+      background: #fff;
+      overflow: hidden;
+    }
+
+    #flipbook .page canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .loading {
+      padding: 80px 20px;
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .reader-controls {
+      margin: 22px auto 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      font-size: 13px;
+    }
+
+    .reader-controls button {
+      border: 0;
+      background: transparent;
+      color: #111;
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 8px 0;
+    }
+
+    .reader-controls button:disabled {
+      color: #bbb;
+      cursor: default;
+    }
+
+    #page-counter {
+      color: #777;
+      min-width: 85px;
+      text-align: center;
+    }
+
+    .book-information {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 100px;
+      padding-top: 0;
+    }
+
+    .book-title {
+      margin: 0;
+      font-size: clamp(20px, 2.3vw, 28px);
+      line-height: 1.3;
+      font-weight: 600;
+      max-width: 520px;
+    }
+
+    .metadata {
+      margin: 0;
+      display: grid;
+      grid-template-columns: 130px 12px minmax(0, 1fr);
+      align-content: start;
+      row-gap: 7px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .metadata dt,
+    .metadata dd {
+      margin: 0;
+    }
+
+    .metadata dd {
+      overflow-wrap: anywhere;
+    }
+
+    .metadata .colon {
+      text-align: center;
+    }
+
+    .metadata a {
+      color: #4263a3;
+    }
+
+    .site-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      background: rgba(255, 255, 255, 0.96);
+      z-index: 10;
+    }
+
+    .copyright {
+      font-size: 9px;
+      color: #555;
+    }
+
+    .bottom-nav {
+      display: flex;
+      gap: 18px;
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .bottom-nav a {
+      color: #999;
+    }
+
+    .bottom-nav a.active {
+      color: #111;
+    }
+
+    .error-message {
+      display: none;
+      max-width: 650px;
+      margin: 30px auto;
+      padding: 20px;
+      color: #555;
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .site-header {
+        padding: 16px;
+      }
+
+      .top-nav {
+        gap: 14px;
+        font-size: 16px;
+      }
+
+      main {
+        padding: 35px 16px 115px;
+      }
+
+      .reader-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .flipbook-area {
+        min-height: 250px;
+      }
+
+      .book-information {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-top: 65px;
+      }
+
+      .metadata {
+        grid-template-columns: 105px 12px minmax(0, 1fr);
+      }
+
+      .site-footer {
+        padding: 12px 16px;
+        align-items: flex-end;
+        gap: 12px;
+      }
+
+      .bottom-nav {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px 12px;
+        font-size: 13px;
+      }
+
+      .copyright {
+        font-size: 8px;
+        white-space: nowrap;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <a class="site-name" href="./index.html">Yoris Mangenda</a>
+
+    <nav class="top-nav" aria-label="Top navigation">
+      <a class="active" href="./books.html">Books</a>
+      <a href="./articles.html">Articles</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="reader-section">
+
+      <div class="reader-heading">
+        <h1>Rumah Bosar</h1>
+        <span class="sample-label">Selected pages · Indonesian</span>
+      </div>
+
+      <div class="flipbook-area">
+        <div id="loading" class="loading">
+          Preparing book preview...
+        </div>
+
+        <div id="flipbook" style="display: none;"></div>
+      </div>
+
+      <div id="reader-error" class="error-message">
+        The book preview could not be loaded. Please refresh the page
+        or check your internet connection.
+      </div>
+
+      <div class="reader-controls">
+        <button id="prev-button" type="button" disabled>
+          ← Previous
+        </button>
+
+        <span id="page-counter">Loading...</span>
+
+        <button id="next-button" type="button" disabled>
+          Next →
+        </button>
+      </div>
+
+      <section class="book-information">
+
+        <div>
+          <h2 class="book-title">
+            Rumah Bosar: Karya Arsitektur Kayu Dayak Pesaguan
+          </h2>
+        </div>
+
+        <dl class="metadata">
+          <dt>Authors</dt>
+          <dd class="colon">:</dd>
+          <dd>Yoris Mangenda, Sheila Nurfajrina</dd>
+
+          <dt>Editor</dt>
+          <dd class="colon">:</dd>
+          <dd>Mohammad Cahyo Novianto</dd>
+
+          <dt>Publisher</dt>
+          <dd class="colon">:</dd>
+          <dd>Realrich Architecture Workshop</dd>
+
+          <dt>Publication date</dt>
+          <dd class="colon">:</dd>
+          <dd>July 6, 2026</dd>
+
+          <dt>ISBN</dt>
+          <dd class="colon">:</dd>
+          <dd>978-623-89171-8-1</dd>
+
+          <dt>Language</dt>
+          <dd class="colon">:</dd>
+          <dd>Bahasa Indonesia</dd>
+
+          <dt>Format</dt>
+          <dd class="colon">:</dd>
+          <dd>Paperback, monochrome</dd>
+
+          <dt>Print length</dt>
+          <dd class="colon">:</dd>
+          <dd>382 pages</dd>
+        </dl>
+
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="copyright">© 2026 Yoris Mangenda</div>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <a class="active" href="./books.html">Publications</a>
+      <a href="./activities.html">Activities</a>
+      <a href="./about.html">About</a>
+      <a href="./contacts.html">Contacts</a>
+    </nav>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
+
+  <script>
+    const PDF_URL = "./rumah-bosar-sample.pdf";
+
+    const loadingElement = document.getElementById("loading");
+    const flipbookElement = document.getElementById("flipbook");
+    const errorElement = document.getElementById("reader-error");
+    const counterElement = document.getElementById("page-counter");
+    const previousButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+
+    let pageFlip = null;
+    let totalPages = 0;
+
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    }
+
+    function showError(message) {
+      loadingElement.style.display = "none";
+      flipbookElement.style.display = "none";
+      errorElement.style.display = "block";
+
+      if (message) {
+        errorElement.textContent = message;
+      }
+    }
+
+    function updateControls() {
+      if (!pageFlip) return;
+
+      const current = pageFlip.getCurrentPageIndex();
+
+      counterElement.textContent =
+        (current + 1) + " / " + totalPages;
+
+      previousButton.disabled = current <= 0;
+      nextButton.disabled = current >= totalPages - 1;
+    }
+
+    async function createFlipbook() {
+      try {
+        if (!window.pdfjsLib || !window.St || !window.St.PageFlip) {
+          throw new Error("The flipbook libraries could not be loaded.");
+        }
+
+        const pdf = await pdfjsLib.getDocument(PDF_URL).promise;
+
+        totalPages = pdf.numPages;
+
+        const firstPage = await pdf.getPage(1);
+        const originalViewport = firstPage.getViewport({ scale: 1 });
+
+        const pageRatio =
+          originalViewport.width / originalViewport.height;
+
+        const availableWidth = Math.min(
+          window.innerWidth - 44,
+          1100
+        );
+
+        const mobile = window.innerWidth <= 700;
+
+        let pageWidth;
+        let pageHeight;
+
+        if (mobile) {
+          pageWidth = Math.floor(availableWidth);
+          pageHeight = Math.floor(pageWidth / pageRatio);
+        } else {
+          pageWidth = Math.floor(availableWidth / 2);
+          pageHeight = Math.floor(pageWidth / pageRatio);
+        }
+
+        pageWidth = Math.max(220, Math.min(pageWidth, 550));
+        pageHeight = Math.floor(pageWidth / pageRatio);
+
+        const renderScale = 1.5;
+        const pages = [];
+
+        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+          const pdfPage = await pdf.getPage(pageNumber);
+
+          const viewport = pdfPage.getViewport({
+            scale: renderScale
+          });
+
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+
+          canvas.width = Math.floor(viewport.width);
+          canvas.height = Math.floor(viewport.height);
+
+          await pdfPage.render({
+            canvasContext: context,
+            viewport: viewport
+          }).promise;
+
+          const pageElement = document.createElement("div");
+          pageElement.className = "page";
+
+          const image = document.createElement("img");
+          image.src = canvas.toDataURL("image/jpeg", 0.92);
+          image.alt = "Rumah Bosar sample page " + pageNumber;
+          image.style.width = "100%";
+          image.style.height = "100%";
+          image.style.objectFit = "contain";
+
+          pageElement.appendChild(image);
+          pages.push(pageElement);
+        }
+
+        pages.forEach(page => flipbookElement.appendChild(page));
+
+        loadingElement.style.display = "none";
+        flipbookElement.style.display = "block";
+
+        pageFlip = new St.PageFlip(flipbookElement, {
+          width: pageWidth,
+          height: pageHeight,
+          size: "stretch",
+          minWidth: 220,
+          maxWidth: 550,
+          minHeight: 300,
+          maxHeight: 850,
+          showCover: true,
+          usePortrait: mobile,
+          drawShadow: true,
+          flippingTime: 700,
+          mobileScrollSupport: true,
+          maxShadowOpacity: 0.18
+        });
+
+        pageFlip.loadFromHTML(
+          flipbookElement.querySelectorAll(".page")
+        );
+
+        pageFlip.on("flip", updateControls);
+
+        previousButton.addEventListener("click", () => {
+          pageFlip.flipPrev();
+        });
+
+        nextButton.addEventListener("click", () => {
+          pageFlip.flipNext();
+        });
+
+        updateControls();
+
+      } catch (error) {
+        console.error("Flipbook error:", error);
+
+        showError(
+          "The preview could not be loaded. Please check that " +
+          "rumah-bosar-sample.pdf is in the repository's root folder."
+        );
+      }
+    }
+
+    createFlipbook();
+  </script>
+
+</body>
+</html>
